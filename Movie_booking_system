@@ -1,0 +1,90 @@
+#importing modules
+from prettytable import PrettyTable  
+import random
+
+"""
+    Preparing a movie list in a table format using prettytable for a nice and tidy look for
+    an user.
+"""
+head = PrettyTable(["SERIAL NO.", "MOVIE NAME", "MOVIE ID"]) 
+head.add_row(["1", "SPIDERMAN: HOMECOMING", "SPI03"])  
+head.add_row(["2", "JUNGLE CRUISE", "JUN04"])  
+head.add_row(["3", "VENOM: LET THERE BE CARNAGE", "VEN06"])  
+
+#Movie List
+movie_list = [
+    {"name": "SPIDERMAN: HOMECOMING", "ID": "SPI03"},
+    {"name": "JUNGLE CRUISE", "ID": "JUN04"},
+    {"name": "VENOM: LET THERE BE CARNAGE", "ID": "VEN06"},
+    ]
+x = []
+mov = []
+print("******Movie Booking System******")
+print("#####################################")
+print("Welcome To The Movie Booking System.")
+name = input("Enter Your Name: ")
+Cus_ID = random.randint(1,90000)
+ticket_cost = 200
+ans = 'y'
+while (ans=='y'):
+    print("Choose From The Given Options.")
+    print("\t1)Book Tickets\n\t2)Total Amount\n\t3)View Booking Details\n\t4)Exit")
+    option=int(input("Enter the option : "))
+    if option == 1:
+        print("Choose A Movie From The List Below.")
+        print(head)
+        mov_opt = int(input("Enter An Option: "))
+        if mov_opt == 1:
+            movie = movie_list[0]["name"]
+            i_d = movie_list[0]["ID"]
+            x.extend((movie, i_d))
+            mov.append(x)
+            x=[]
+            print(f"Hi {name}, Your Movie Name Is, {movie} And The Movie ID Is {i_d}.")
+        elif mov_opt == 2:
+            movie = movie_list[1]["name"]
+            i_d = movie_list[1]["ID"]
+            x.extend((movie, i_d))
+            mov.append(x)
+            x=[]
+            print(f"Hi {name}, Your Movie Name Is, {movie} And The Movie ID Is {i_d}.")
+        elif mov_opt == 3:
+            movie = movie_list[2]["name"]
+            i_d = movie_list[2]["ID"]
+            x.extend((movie, i_d))
+            mov.append(x)
+            x=[]
+            print(f"Hi {name}, Your Movie Name Is, {movie} And The Movie ID Is {i_d}.")
+        else:
+            print("Please, Enter A Valid Option.")
+        date = input("Please Input The Show Date In MM/DD: ")
+        time = input("Please Input The Show Time in 24-Hours Format in HH:MM: ")
+        seats = int(input("Please Enter The Number Of Seats To Be Booked: "))
+        x = 1
+        y = x + seats
+        z = tuple(range(x, y))
+        total_cost = ticket_cost * seats 
+        a = str(total_cost)
+        print(f"Your Customer ID is {Cus_ID}")
+        cnf = input("Please Enter 'Y' To Confirm Your Bookings: ")
+        if cnf == "Y":
+            print("Your Bookings Has Been Successfully Made.")
+        elif cnf == "y":
+            print("Your Bookings Has Been Successfully Made.")
+        else:
+            print("Bookings Failed! Please Try Again.")
+    elif option == 2:
+        print(f"The Total Cost Of Booking Is ₹{total_cost}.")  
+    elif option == 3:
+        cus_ID = int(input("Enter Your Customer ID: "))
+        if cus_ID == Cus_ID:
+            print("Here, Is Your Booking Details.")
+            top = PrettyTable(["CUSTOMER NAME", "CUSTOMER ID", "MOVIE NAME/ID", "SEAT NUMBERS", "DATE", "TIME", "Total Amount"]) 
+            top.add_row([name, Cus_ID, mov, z, date, time, total_cost])  
+            print(top)
+            break
+    elif option == 4:
+            print(">>>>>Exiting<<<<<")
+    else:
+        print('Wrong Option. Please Try Again.')
+print("Thank you for using our service.")
